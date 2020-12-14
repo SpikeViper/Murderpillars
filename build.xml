@@ -1,0 +1,37 @@
+<project default="dist">
+
+    <target name="compile">
+        <mkdir dir="bin"/>
+        <!-- <copy file="plugin.yml" tofile="bin/plugin.yml" /> -->
+
+        <javac srcdir="com" destdir="bin">
+            <classpath refid="class.path" />
+        </javac>
+    </target>
+
+    <target name="dist" depends="compile" description="generate the distribution">
+        <buildnumber />
+        <!-- Create the distribution directory -->
+        <mkdir dir="jars" />
+ 
+        <!-- Put everything in ${build} into the MyApplication-${version}.${build.number}.jar -->
+        <jar destfile="jars/Murderpillars.jar" basedir="bin" />
+
+        <copy file="jars/Murderpillars.jar" tofile="TestServer/plugins/Murderpillars.jar" />
+
+        <!-- 
+        <exec dir="TestServer/" executable="cmd">
+            <arg line="/c java -jar server.jar -nogui"/>
+        </exec>
+        -->
+        
+
+    </target>
+
+    <path id="class.path">
+      <fileset dir="lib">
+        <include name="**/*.jar" />
+      </fileset>
+    </path>
+
+</project>
